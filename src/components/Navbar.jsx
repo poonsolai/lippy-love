@@ -2,27 +2,29 @@ import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import Home from '../pages/Home'
 import Cart from '../pages/Cart'
+import openimg from '../image/open.png'
+import makeup_data from '../makeup_data.json'
 
 function Navbar() {
 
+    //state variables
     const [home,setHome] = useState(true);
     const [cart,setCart] = useState(false);
     const [data,setData] = useState([]);
     const [cdata,setCdata] = useState([]);
     const [empty,setEmpty] = useState(true);
 
+    //load data once
     useEffect(()=>{
-        fetch("/makeup_data.json")
-        .then((res)=> res.json())
-        .then((data)=> setData(data))
+        setData(makeup_data);
     },[]);
     
-
+    //function to switch to home page
     function homefun(e){
             setHome(true);
             setCart(false);
     }
-
+    //function to switch to cart page
     function cartfun(e){
             setHome(false);
             setCart(true);
@@ -31,7 +33,9 @@ function Navbar() {
 
     
   return (
+    
     <div>
+
         <div className='nav'>
             <h1>Lippy love</h1>
             <ul>
@@ -41,7 +45,7 @@ function Navbar() {
         </div>
         {
             !cart && <div className="new">
-                        <img src="/open.png" alt="" className='open-img'/>
+                        <img src={openimg} alt="" className='open-img'/>
                     </div>
         }
         <div className="pages">

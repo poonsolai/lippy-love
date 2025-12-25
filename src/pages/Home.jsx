@@ -1,11 +1,13 @@
-
 import './home.css'
+
+
 function Home({prodata,cart,setCdata}) {
 
-   
+    //product add to cart function
     function Addcart(pro){
         setCdata([...cart,pro]);
     }
+    //product remove from cart function
     function Removecart(id){
         setCdata(cart.filter((pro)=>{return id !== pro.id}));
     }
@@ -25,7 +27,6 @@ function Home({prodata,cart,setCdata}) {
                         <h3>Brand : {pro.brand}</h3>
                         <h3 style={{fontSize:"25px", color:"green"}}> {pro.price_sign}{pro.price}</h3>
                     </div>
-                    {/* <h3>Type: {pro.product_type}</h3> */}
                 </div>
                 <div>
                     {

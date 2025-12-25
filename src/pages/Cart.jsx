@@ -2,26 +2,30 @@ import React, { useEffect, useState } from 'react'
 import './cart.css'
 
 function Cart({cartdata,setCart,set}) {
-  
+  //state variables
   const [empty,setEmpty] = useState(true);
   const [amt,setAmt] = useState(0);
+  //window size
   let width = window.innerWidth;
  
+  //product remove to cart page
   function removecart(id){
     setCart(cartdata.filter((pro)=>id !== pro.id));
   }
   
+  //update empty and total amount whenever cartdata changes
   useEffect(()=>{
     cartdata.length == 0 ? setEmpty(true) : setEmpty(false);
     setAmt(cartdata.reduce((acc,ans)=>acc + parseInt(ans.price),0))
   },[cartdata]);
     
- 
+  //order now function
   function ordernow(){
     alert("ORDER CONFIREMED SUCCESSFULLY 💕 💕");
-    // setShow(true);
     setCart([])
   }
+
+
   return (
     <>
       
@@ -31,10 +35,11 @@ function Cart({cartdata,setCart,set}) {
                   <button className='order' onClick={ordernow}>Order Now</button>
                 </div>
      }
-       
-      
-      {
-        empty && <div className="empty-cart"><h1 className='empty'>Cart is empty</h1><button className='add' onClick={()=>{set()}}>Add Products</button></div>
+     {
+        empty && <div className="empty-cart">
+                    <h1 className='empty'>Cart is empty</h1>
+                    <button className='add' onClick={()=>{set()}}>Add Products</button>
+                  </div>
       }
       {
         cartdata.map((cart)=>(
